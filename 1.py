@@ -16,4 +16,19 @@ class Solution:
             if (target-nums[i]) in nums:
                 if i != nums.index(target-nums[i]):
                     return [i, nums.index(target-nums[i])]
-                    
+    
+    def twoSumV2(self, nums: List[int], target: int) -> List[int]:
+        dic = {}
+        for i in range(len(nums)):
+            if (nums[i] not in dic):
+                dic[nums[i]] = [i]
+            else:
+                dic[nums[i]].append(i)
+
+        for i in range(len(nums)):
+            num = target - nums[i]
+            if (num in nums[i+1:]):
+                if (dic[nums[i]] != dic[num]):
+                    return [dic[nums[i]][0], dic[num][0]]
+                else:
+                    return [dic[nums[i]][0], dic[num][1]]
